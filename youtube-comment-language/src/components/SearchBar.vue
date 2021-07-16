@@ -8,6 +8,7 @@
 
 <script>
 import LanguageSelection from './LanguageSelection.vue'
+import YoutubeCommentsService from './../services/YoutubeCommentsService.js'
 
 export default({
    name: "SearchBar",
@@ -20,7 +21,7 @@ export default({
    },
    methods: {
        search: function(){
-           alert(this.url + " " + this.searchLanguage);
+           alert(YoutubeCommentsService.getCommentsByVideoId (this.url + " " + this.searchLanguage));
        }
    }
 })
