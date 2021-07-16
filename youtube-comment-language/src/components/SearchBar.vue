@@ -1,8 +1,8 @@
 <template>
     <div>
-        <input type="text" :placeholder="placeHolder">
-        <button> Search </button>
-        <LanguageSelection></LanguageSelection>
+        <input type="text" placeholder="Enter Video URL" v-model="url">
+        <button @click="search"> Search </button>
+        <LanguageSelection @language-changed="searchLanguage=$event" ></LanguageSelection>
     </div>
 </template>
 
@@ -14,7 +14,13 @@ export default({
    components: {LanguageSelection},
    data: function(){
        return{
-           placeHolder: "Enter Video URL"
+           url: "",
+           searchLanguage: ""
+       }
+   },
+   methods: {
+       search: function(){
+           alert(this.url + " " + this.searchLanguage);
        }
    }
 })

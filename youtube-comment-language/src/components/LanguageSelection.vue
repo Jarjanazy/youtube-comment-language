@@ -1,6 +1,6 @@
 <template>
     <div>
-        <select id="languages">
+        <select id="languages" v-model="selectedLanguage">
             <option value="arabic">Arabic</option>
             <option value="english">English</option>
         </select>
@@ -14,7 +14,12 @@ export default({
     name: 'LanguageSelection',
     data: function(){
         return{
-
+            selectedLanguage: ""
+        }
+    },
+    watch: {
+        selectedLanguage: function(newLanguage){
+            this.$emit('language-changed', newLanguage);
         }
     }
 
