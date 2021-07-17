@@ -10,16 +10,16 @@ const createRequestUrl = function(baseUrl, apiKey, videoId){
 const getCommentsFromResponse = function(response){
     return response.data
     .items
-    .map(i => i.snippet.topLevelComment.snippet.textDisplay);
+    .map(i => i.snippet.topLevelComment.snippet.textOriginal);
 }
 
 
 // Make sure the client is loaded before calling this method.
 const getCommentsByVideoId = function(videoId) {
     const requestUrl = createRequestUrl(youtubeApiUrl, apiKey, videoId);
-    axios
+    return axios
       .get(requestUrl)
-      .then(response => console.log(getCommentsFromResponse(response)));
+      .then(response => getCommentsFromResponse(response));
 }
 
 export default ({
