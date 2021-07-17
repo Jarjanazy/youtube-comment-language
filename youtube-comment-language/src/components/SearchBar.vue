@@ -21,8 +21,8 @@ export default({
    },
    methods: {
        search: function(){
-           alert(YoutubeCommentsService.getCommentsByVideoId (this.url + " " + this.searchLanguage));
-       }
+           console.log(YoutubeCommentsService.getCommentsByVideoId(this.url));
+       },
    }
 })
 </script>
