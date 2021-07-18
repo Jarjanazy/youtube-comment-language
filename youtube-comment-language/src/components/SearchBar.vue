@@ -11,6 +11,7 @@
 <script>
 import LanguageSelection from './LanguageSelection.vue'
 import YoutubeCommentsService from './../services/YoutubeCommentsService.js'
+import LanguageDetectorService from './../services/LanguageDetectorService.js'
 import Comments from './Comments.vue';
 
 export default({
@@ -29,7 +30,7 @@ export default({
            YoutubeCommentsService
            .getCommentsByVideoUrl(this.url)
            .then(comments => {
-               this.comments = comments;
+               this.comments = LanguageDetectorService.getAllStringOfLanguage(comments, this.searchLanguage);
                this.displayComments = true;
            });
        },
