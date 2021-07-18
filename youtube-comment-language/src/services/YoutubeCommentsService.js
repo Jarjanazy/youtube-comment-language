@@ -3,12 +3,14 @@ const apiKey = 'AIzaSyDvEHdQhrNzw1Ksq1PqABCIj4pX1vbZhl8'
 
 const axios = require('axios').default;
 
-const createRequestUrl = function(baseUrl, apiKey, videoId){
+const createRequestUrl = function(baseUrl, apiKey, videoUrl){
+    const videoId = extractVideoId(videoUrl);
     return `${baseUrl}&key=${apiKey}&videoId=${videoId}`;
 }
 
 const getCommentsFromResponse = function(response){
-    return response.data
+    return response
+    .data
     .items
     .map(i => i.snippet.topLevelComment.snippet.textOriginal);
 }
@@ -19,9 +21,7 @@ const extractVideoId = function(videoUrl){
 }
 
 const getCommentsByVideoUrl = function(videoUrl) {
-    const videoId = extractVideoId(videoUrl);
-    console.log(videoId);
-    const requestUrl = createRequestUrl(youtubeApiUrl, apiKey, videoId);
+    const requestUrl = createRequestUrl(youtubeApiUrl, apiKey, videoUrl);
     return axios
       .get(requestUrl)
       .then(response => getCommentsFromResponse(response));

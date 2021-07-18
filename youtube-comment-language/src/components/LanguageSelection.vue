@@ -3,6 +3,7 @@
         <select id="languages" v-model="selectedLanguage">
             <option value="arabic">Arabic</option>
             <option value="english">English</option>
+            <option value="turkish">Turkish</option>
         </select>
     </div>
 </template>

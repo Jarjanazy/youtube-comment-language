@@ -3,8 +3,6 @@
         <input type="text" placeholder="Enter Video URL" v-model="url">
         <button @click="search"> Search </button>
         <LanguageSelection @language-changed="searchLanguage=$event" ></LanguageSelection>
-
-        <Comments :comments="comments" v-if="displayComments"></Comments>
     </div>
 </template>
 
@@ -12,26 +10,24 @@
 import LanguageSelection from './LanguageSelection.vue'
 import YoutubeCommentsService from './../services/YoutubeCommentsService.js'
 import LanguageDetectorService from './../services/LanguageDetectorService.js'
-import Comments from './Comments.vue';
 
 export default({
    name: "SearchBar",
-   components: {LanguageSelection, Comments},
+   components: {LanguageSelection},
    data: function(){
        return{
            url: "",
            searchLanguage: "",
-           comments: [],
-           displayComments: false
        }
    },
    methods: {
        search: function(){
+           this.comments = [];
            YoutubeCommentsService
            .getCommentsByVideoUrl(this.url)
            .then(comments => {
-               this.comments = LanguageDetectorService.getAllStringOfLanguage(comments, this.searchLanguage);
-               this.displayComments = true;
+               const filterComments = LanguageDetectorService.getAllStringOfLanguage(comments, this.searchLanguage);
+               this.$emit('commentsReady', filterComments);
            });
        },
    }
