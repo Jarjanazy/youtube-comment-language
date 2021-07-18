@@ -1,11 +1,9 @@
 const youtubeApiUrl = 'https://youtube.googleapis.com/youtube/v3/commentThreads?maxResults=100&part=replies%2C%20snippet';
 const apiKey = 'AIzaSyDvEHdQhrNzw1Ksq1PqABCIj4pX1vbZhl8'
 
-const axios = require('axios').default;
-
-const createRequestUrl = function(baseUrl, apiKey, videoUrl){
+const createRequestUrl = function(videoUrl){
     const videoId = extractVideoId(videoUrl);
-    return `${baseUrl}&key=${apiKey}&videoId=${videoId}`;
+    return `${youtubeApiUrl}&key=${apiKey}&videoId=${videoId}`;
 }
 
 const getCommentsFromResponse = function(response){
@@ -20,13 +18,7 @@ const extractVideoId = function(videoUrl){
     return videoIdWithPossibletimeStamp.split("&t")[0];
 }
 
-const getCommentsByVideoUrl = function(videoUrl) {
-    const requestUrl = createRequestUrl(youtubeApiUrl, apiKey, videoUrl);
-    return axios
-      .get(requestUrl)
-      .then(response => getCommentsFromResponse(response));
-}
-
 export default ({
-    getCommentsByVideoUrl
+    createRequestUrl,
+    getCommentsFromResponse
 });
