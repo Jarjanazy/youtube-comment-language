@@ -13,9 +13,13 @@ const getCommentsFromResponse = function(response){
     .map(i => i.snippet.topLevelComment.snippet.textOriginal);
 }
 
+const extractVideoId = function(videoUrl){
+    return videoUrl.split("?v=")[1];
+}
 
 // Make sure the client is loaded before calling this method.
-const getCommentsByVideoId = function(videoId) {
+const getCommentsByVideoUrl = function(videoUrl) {
+    const videoId = extractVideoId(videoUrl);
     const requestUrl = createRequestUrl(youtubeApiUrl, apiKey, videoId);
     return axios
       .get(requestUrl)
@@ -23,5 +27,5 @@ const getCommentsByVideoId = function(videoId) {
 }
 
 export default ({
-    getCommentsByVideoId
+    getCommentsByVideoUrl
 });

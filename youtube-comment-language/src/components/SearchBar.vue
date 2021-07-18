@@ -27,7 +27,7 @@ export default({
    methods: {
        search: function(){
            YoutubeCommentsService
-           .getCommentsByVideoId(this.url)
+           .getCommentsByVideoUrl(this.url)
            .then(comments => {
                this.comments = comments;
                this.displayComments = true;
