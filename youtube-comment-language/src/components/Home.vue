@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>{{appName}}</h2>
-        <SearchBar @commentsReady="addComments($event)"></SearchBar>
+        <SearchBar @initialCommentsReady="addComments($event)" @otherCommentsReady="concatComments($event)"></SearchBar>
         <Comments :comments="comments" v-if="displayComments"></Comments>
     </div>
 </template>
@@ -25,6 +25,9 @@ export default ({
         addComments: function(comments){
             this.comments = comments;
             this.displayComments = true;
+        },
+        concatComments: function(comments){
+            this.comments = this.comments.concat(comments);
         }
     }
 })
