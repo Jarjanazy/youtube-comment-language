@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <h2>{{appName}}</h2>
-        <SearchBar @initialCommentsReady="addComments($event)" @otherCommentsReady="concatComments($event)"></SearchBar>
-        <Comments :comments="comments" v-if="displayComments"></Comments>
-    </div>
+    <c-stack :spacing="4">
+        <c-box>
+            <SearchBar style="margin:30px" @initialCommentsReady="addComments($event)" @otherCommentsReady="concatComments($event)"></SearchBar>
+        </c-box>
+        <c-box>
+            <Comments :comments="comments" v-if="displayComments"></Comments>
+        </c-box>
+    </c-stack>
 </template>
 
 <script>
@@ -15,10 +18,8 @@ export default ({
     components: {SearchBar, Comments},
     data: function(){
         return{
-            appName: "Cool App",
             comments: [],
             displayComments: false
-
         }
     },
     methods:{

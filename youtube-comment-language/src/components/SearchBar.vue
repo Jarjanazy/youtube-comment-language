@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <input type="text" placeholder="Enter Video URL" v-model="url">
-        <button @click="search"> Search </button>
+    <c-flex justify="center" gridGap="2">
+        <c-input type="text" placeholder="Enter Video URL" v-model="url" style="width:50%"></c-input>
         <LanguageSelection @language-changed="searchLanguage=$event" ></LanguageSelection>
-    </div>
+        <c-button @click="search"> Search </c-button>
+    </c-flex>
 </template>
 
 <script>

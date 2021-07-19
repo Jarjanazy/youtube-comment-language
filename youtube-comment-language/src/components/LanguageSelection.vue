@@ -1,10 +1,12 @@
 <template>
     <div>
-        <select id="languages" v-model="selectedLanguage">
+        <c-select id="languages" v-model="selectedLanguage" placeholder="Select A Language">
             <option value="arabic">Arabic</option>
             <option value="english">English</option>
             <option value="turkish">Turkish</option>
-        </select>
+            <option value="spanish">Spanish</option>
+            <option value="russian">Russian</option>
+        </c-select>
     </div>
 </template>
 

@@ -1,9 +1,9 @@
 <template>
 
 <div>
-    <li v-for="(item, index) in comments" :key="index">
+    <c-list v-for="(item, index) in comments" :key="index">
         <Comment :commentString="item"></Comment>
-    </li>
+    </c-list>
 </div>
 </template>
 
