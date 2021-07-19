@@ -1,11 +1,22 @@
 <template>
     <c-stack :spacing="4">
         <c-box>
-            <SearchBar style="margin:30px" @initialCommentsReady="addComments($event)" @otherCommentsReady="concatComments($event)"></SearchBar>
+            <SearchBar style="margin:30px" @initialCommentsReady="addComments($event)"
+                @otherCommentsReady="concatComments($event)" @changeLoader="showLoader=$event">
+            </SearchBar>
         </c-box>
         <c-box>
             <Comments :comments="comments" v-if="displayComments"></Comments>
         </c-box>
+        <Center v-if="showLoader">
+            <c-spinner
+                thickness="4px"
+                speed="0.65s"
+                empty-color="green.200"
+                color="vue.500"
+                size="xl"
+            />
+        </Center>
     </c-stack>
 </template>
 
@@ -19,7 +30,8 @@ export default ({
     data: function(){
         return{
             comments: [],
-            displayComments: false
+            displayComments: false,
+            showLoader: false
         }
     },
     methods:{

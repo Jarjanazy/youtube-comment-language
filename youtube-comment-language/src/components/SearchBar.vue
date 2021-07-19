@@ -40,10 +40,14 @@ export default({
         emitInitialComments: function(comments){
             const filterComments = LanguageDetectorService.getAllStringOfLanguage(comments, this.searchLanguage);
             this.$emit('initialCommentsReady', filterComments);
+            this.$emit('changeLoader', true);
         },
         getCommentsByPageToken: function(requestUrl, nextPageToken){
-            if (typeof nextPageToken === undefined)
+            if (typeof nextPageToken === 'undefined'){
+                this.$emit('changeLoader', false);
                 return;
+            }
+            debugger;// eslint-disable-line no-debugger
             axios
                 .get(YoutubeCommentsService.createRequestUrlForNextPageToken(requestUrl, nextPageToken))
                 .then(response => {
