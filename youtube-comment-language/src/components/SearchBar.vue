@@ -23,19 +23,17 @@ export default({
        }
    },
    methods: {
-       search: function(){
-           this.getCommentsByVideoUrl(this.url)
-               .then(initialComments => this.emitInitialComments(initialComments));
+       search: async function(){
+           const requestUrl = YoutubeCommentsService.createRequestUrl(this.url);
+           const response = await axios.get(requestUrl);
+
+           this.getInitialCommentsByVideoUrl(response);
+
+           this.getCommentsByPageToken(requestUrl, response.data.nextPageToken);
        },
-        getCommentsByVideoUrl: function(videoUrl) {
-            const requestUrl = YoutubeCommentsService.createRequestUrl(videoUrl);
-            return axios
-                .get(requestUrl)
-                .then(response => {
-                    const initialComments = YoutubeCommentsService.getCommentsFromResponse(response);
-                    this.getCommentsByPageToken(requestUrl, response.data.nextPageToken);
-                    return initialComments;
-                });
+        getInitialCommentsByVideoUrl: function(response) { 
+            const initialComments = YoutubeCommentsService.getCommentsFromResponse(response);
+            this.emitInitialComments(initialComments);
         },
         emitInitialComments: function(comments){
             const filterComments = LanguageDetectorService.getAllStringOfLanguage(comments, this.searchLanguage);
@@ -47,7 +45,6 @@ export default({
                 this.$emit('changeLoader', false);
                 return;
             }
-            debugger;// eslint-disable-line no-debugger
             axios
                 .get(YoutubeCommentsService.createRequestUrlForNextPageToken(requestUrl, nextPageToken))
                 .then(response => {

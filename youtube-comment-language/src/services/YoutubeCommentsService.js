@@ -1,5 +1,5 @@
 const youtubeApiUrl = 'https://youtube.googleapis.com/youtube/v3/commentThreads?maxResults=100&part=replies%2C%20snippet';
-const apiKey = 'AIzaSyDvEHdQhrNzw1Ksq1PqABCIj4pX1vbZhl8'
+const apiKey = process.env.VUE_APP_API_KEY
 
 const extractVideoId = function(videoUrl){
     let videoIdWithPossibletimeStamp = videoUrl.split("?v=")[1];
