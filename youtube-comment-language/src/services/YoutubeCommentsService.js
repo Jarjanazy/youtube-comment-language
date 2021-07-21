@@ -25,5 +25,6 @@ const getCommentsFromResponse = function(response){
 export default ({
     createRequestUrl,
     createRequestUrlForNextPageToken,
-    getCommentsFromResponse
+    getCommentsFromResponse,
+    extractVideoId
 });

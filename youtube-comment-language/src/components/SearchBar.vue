@@ -30,6 +30,8 @@ export default({
            this.getInitialCommentsByVideoUrl(response);
 
            this.getCommentsByPageToken(requestUrl, response.data.nextPageToken);
+
+           this.$emit('changeVideoId', YoutubeCommentsService.extractVideoId(this.url));
        },
         getInitialCommentsByVideoUrl: function(response) { 
             const initialComments = YoutubeCommentsService.getCommentsFromResponse(response);
